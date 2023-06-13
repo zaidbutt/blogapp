@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,7 @@ SECRET_KEY = 'django-insecure-%&=otqq$729$@#a-_yk-02u8oy79brktn)mz%de1f@=p-ozb##
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+config = dotenv_values(".env")
 
 ALLOWED_HOSTS = []
 
@@ -69,32 +71,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blogapp.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-
-#     }
-# }
-DATABASES = {}
 DATABASES = { 'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'blog-app-db',
-    'USER': 'yomolopo',
-    'PASSWORD': 'yomolopo',
-    'HOST': '127.0.0.1',
-    'PORT': '5432'
+    'ENGINE': config['ENGINE'],
+    'NAME': config['NAME'],
+    'USER': config['USER'],
+    'PASSWORD': config['PASSWORD'],
+    'HOST': config['HOST'],
+    'PORT': config['PORT']
     }
 }
-# DATABASES['default']['ATOMIC_REQUESTS'] = True
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
